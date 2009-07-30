@@ -1,7 +1,6 @@
-/*!
+/**
  * memcache.js - memcache-like object for javascript.
- * Copyright (C) 2009 Yesudeep Mangalapilly.
- *
+ * Copyright (C) 2009 happychickoo.
  * Licensed under the terms of the MIT license.
  */
 this.memcache = {
