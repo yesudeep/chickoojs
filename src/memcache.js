@@ -15,12 +15,12 @@ this.memcache = {
           timeout = 0;
           }*/
         timeout = timeout || 0;
-        var human_timeout = timeout / 1000;
-        logger.debug(['[memcache.set.key]', key, 'timeout: ', human_timeout, 'seconds'].join(' '));
+        var humanTimeout = timeout / 1000;
+        logger.debug(['[memcache.set.key]', key, 'timeout: ', humanTimeout, 'seconds'].join(' '));
         store[key] = value;
         if (timeout){
             setTimeout(function(){
-                    logger.debug(['[memcache.delete.key]', key, 'timeout: ', human_timeout, 'seconds reached'].join(' '));
+                    logger.debug(['[memcache.delete.key]', key, 'timeout: ', humanTimeout, 'seconds reached'].join(' '));
                     delete store[key];
                 }, timeout);
         }

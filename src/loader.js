@@ -4,18 +4,18 @@
  *
  * Licensed under the terms of the MIT license.
  */
-function decode_value(key, value){
+function decodeValue(key, value){
     switch(key){
     case 'src':
     case 'SRC':
         value = decodeURI(value);
-    break;
+        break;
     default:
         break;
     }
     return value;
 }
-function convert_to_object(script){
+function convertToObject(script){
     switch (typeof script){
     case 'string':
         script = {src: script};
@@ -43,12 +43,12 @@ function getScripts(scripts){
 
     if(ua.indexOf("MSIE") > -1 || ua.indexOf("WebKit") > -1) {
         for (var i = 0; i < len; ++i){
-            script = convert_to_object(scripts[i]);
+            script = convertToObject(scripts[i]);
             var attrs = [];
             for (key in script){
                 if (script.hasOwnProperty(key) &&
                     typeof key === 'string'){
-                    value = decode_value(key, script[key]);
+                    value = decodeValue(key, script[key]);
                     attrs.push([key,
                                 '\"' + value + '\"'
                                 ].join('='));
@@ -68,11 +68,11 @@ function getScripts(scripts){
         var body = doc.getElementsByTagName('body')[0];
         for (var j = 0; j < len; ++j){
             var elem = doc.createElement('script');
-            script = convert_to_object(scripts[j]);
+            script = convertToObject(scripts[j]);
             for (key in script){
                 if (script.hasOwnProperty(key) &&
                     typeof key === 'string'){
-                    value = decode_value(key, script[key]);
+                    value = decodeValue(key, script[key]);
                     elem.setAttribute(key, value);
                 }
             }
