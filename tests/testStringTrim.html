@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+        <title>String.prototype.trim tests.</title>
+        <script src="../src/builtins.js"></script>
+    </head>
+    <body>
+        <script>            
+            console.assert('  foobar  '.trim() == 'foobar');
+            console.assert('  foobar  r'.trim('r') == '  foobar  ');
+            console.assert('  foobar  r'.trim('r', true) == 'fooba');
+            console.assert('r  rfoobar  r'.trim('r', true) == 'fooba');
+            console.assert('  foobar  r'.trim('r', false) == '  foobar  ');
+        </script>
+    </body>
+</html>

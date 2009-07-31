@@ -16,11 +16,11 @@ function decodeValue(key, value){
     return value;
 }
 function convertToObject(script){
-    switch (typeof script){
-    case 'string':
+    switch (Object.prototype.toString.call(script)){
+    case '[object String]':
         script = {src: script};
         break;
-    case 'object':
+    case '[object Object]':
         break;
     default:
         throw new Error('Found \"' + script +
