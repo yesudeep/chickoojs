@@ -4,7 +4,7 @@
 
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>JavaScript trim comparison</title>
-	
+
 
 	<script type="text/javascript">
 		function trim1 (str) {
@@ -115,16 +115,16 @@ function trim14(str) {
     if (!len) {
         return str;
     }
-    
+
     whiteSpace = String.whiteSpace;
-    
+
     if (len && whiteSpace[str.charCodeAt(len-1)])
     {
         do{
             --len;
         }
         while (len && whiteSpace[str.charCodeAt(len - 1)]);
-        
+
         if (len && whiteSpace[str.charCodeAt(0)]){
             i = 1;
             while (i < len && whiteSpace[str.charCodeAt(i)]){
@@ -143,7 +143,7 @@ function trim14(str) {
     return str;
 };
 
-// Slightly faster because there is one less "check" and we're accounting for the 
+// Slightly faster because there is one less "check" and we're accounting for the
 // fact that majority of the strings passed for trimming will not be empty.
 function trim15(str) {
     var len = str.length, whiteSpace = String.whiteSpace, i = 0;
@@ -154,7 +154,7 @@ function trim15(str) {
                 --len;
             }
             while (len && whiteSpace[str.charCodeAt(len - 1)]);
-            
+
             if (len && whiteSpace[str.charCodeAt(0)]){
                 i = 1;
                 while (i < len && whiteSpace[str.charCodeAt(i)]){
@@ -163,7 +163,7 @@ function trim15(str) {
             }
             return str.substring(i, len);
         }
-        
+
         if (len && whiteSpace[str.charCodeAt(0)]) {
             i = 1;
             while (i < len && whiteSpace[str.charAt(i)]){
@@ -172,7 +172,7 @@ function trim15(str) {
             return str.substring(i, len);
         }
     }
-    
+
     return str;
 };
 
@@ -187,7 +187,7 @@ function trim16(str) {
                 //--len; // Do this in the while condition.  Keep the loop empty.
             }*/
             while (--len && whiteSpace[str.charCodeAt(len - 1)]);
-            
+
             // Remove from the beginning.
             if (len && whiteSpace[str.charCodeAt(0)]){
                 i = 1;
@@ -197,7 +197,7 @@ function trim16(str) {
             }
             return str.substring(i, len);
         }
-        
+
         // Remove from the beginning.
         if (whiteSpace[str.charCodeAt(0)]) {
             i = 1;
@@ -207,7 +207,7 @@ function trim16(str) {
             return str.substring(i, len);
         }
     }
-    
+
     return str;
 };
 
@@ -226,7 +226,31 @@ function trim17(str){
     return str;
 }
 
+// jQuery's trim
+// The only difference between jquery's original trim
+// and this is variable access.  jQuery's original code
+// access a global variable called rtrim, so i'm not
+// accounting for scope chain access over here.  just
+// trying to find the raw speed of the function.
+var __rtrim = /^\s+|\s+$/g;
+function trim18(text) {
+    return (text || "").replace(__rtrim, "" );
+}
 
+// rightjs's suggestion
+// not as fast.
+function trim19(text){
+    var str = text.replace(/^\s\s*/, ''),
+        ws = /\s/,
+            i = str.length;
+    while (ws.test(str.charAt(--i)));
+    return str.slice(0, i + 1);
+}
+
+// Native implementation if available.
+/*function trim20(text){
+    return text.trim();
+}*/
 
 		// Create basic console methods
 		var konsole = {
@@ -244,14 +268,14 @@ function trim17(str){
 			},
 			_timers: {}
 		};
-		
+
 		// Test speed and accuracy
 		function benchmark () {
 			var value = $('test').value,
 				times = $('times').value,
 				took;
 			konsole.log('Original length: ' + value.length + '<br>\n');
-			for (var i = 10; i <= 17; i++) {
+			for (var i = 1; i <= 19; i++) {
 				var name = 'trim' + i,
 					fn = window[name],
 					n = times;
@@ -264,7 +288,7 @@ function trim17(str){
 			var log = $('log');
 			log.scrollTop = log.scrollHeight; // Scroll to the bottom of the log
 		}
-		
+
 		// This is much faster than simple use of innerHTML in some browsers
 		function replaceHtml (el, html) {
 			var oldEl = typeof el === "string" ? document.getElementById(el) : el;
@@ -279,7 +303,7 @@ function trim17(str){
 			to the new element, which can be used to restore variable references. */
 			return newEl;
 		};
-		
+
 		function $ (el) {
 			if (typeof el === "string")
 				return document.getElementById(el);
@@ -288,7 +312,7 @@ function trim17(str){
 			return false;
 		};
 	</script>
-	
+
 	<style type="text/css">
 		body {margin:0; padding:15px; font-size:80%; font-family:Verdana, Arial, Helvetica, sans-serif;}
 		#log {width:99%; height:400px; border:1px solid #ccc; font-size:85%; padding:5px; background:#fafafa; overflow:auto; margin:15px 0; font-family:Consolas, "Courier New", Courier, monospace;}
@@ -368,17 +392,17 @@ function trim17(str){
 
 == Acknowledgements ==
 
-Prepared by Nancy Troutman (The Cleveland Free-Net - aa345) Distributed by the Cybercasting Services Division of the National Public Telecomputing Network (NPTN). Permission is hereby given to download, reprint, and/or otherwise redistribute this file, provided appropriate point of origin credit is given to the preparer(s) and the National Public Telecomputing Network. 
+Prepared by Nancy Troutman (The Cleveland Free-Net - aa345) Distributed by the Cybercasting Services Division of the National Public Telecomputing Network (NPTN). Permission is hereby given to download, reprint, and/or otherwise redistribute this file, provided appropriate point of origin credit is given to the preparer(s) and the National Public Telecomputing Network.
 		</textarea>
 		<br>
-		
+
 		<input value="Test" onclick="benchmark();" type="button">
 		<input size="4" id="times" value="20" type="text"> times.
 	</form>
-	
+
 	<div id="log"></div>
-	
+
 	<p>« Back to my blog post, <a href="http://blog.stevenlevithan.com/archives/faster-trim-javascript"><strong>Faster JavaScript Trim</strong></a>.</p>
-	
+
 	<script src="trim.cfm_files/a_002"></script>
 </body></html>
