@@ -109,7 +109,23 @@ String.whiteSpace[0x3000] = true;
 */
 
 /**
- * An extremely fast trim string function.
+ * An extremely fast trim string implementation.
+ */
+String.prototype.trim = function(){
+    var str = this, len = str.length;
+    if (len){
+        var whiteSpace = String.whiteSpace, i = 0;
+        while (whiteSpace[str.charCodeAt(--len)]);
+        if (++len){
+            while (whiteSpace[str.charCodeAt(i)]){ ++i; }
+        }
+        str = str.substring(i, len);
+    }
+    return str;
+}
+
+/**
+ * An extremely fast strip string function.
  * based on Michael Lee Finney's lookup table.
  *
  * @param trimCharacters       String/Array  (Optional)  Trim these characters from both ends of the string.
@@ -117,7 +133,7 @@ String.whiteSpace[0x3000] = true;
  * @param includingWhitespace  Boolean       (Optional)  Trim whitespace characters along with characters specified
  *                                           in trimCharacters.
  */
-String.prototype.trim = function(){
+String.prototype.strip = function(){
     var str = this, len = str.length, c = 0, i = 0, chars = [];
     if (len){
         var includingChars = [], stripChars = [];

@@ -226,15 +226,19 @@ function trim17(str){
     return str;
 }
 
+
+
+
 // jQuery's trim
 // The only difference between jquery's original trim
 // and this is variable access.  jQuery's original code
 // access a global variable called rtrim, so i'm not
 // accounting for scope chain access over here.  just
 // trying to find the raw speed of the function.
-var __rtrim = /^\s+|\s+$/g;
+//var __rtrim = /^\s+|\s+$/g;
 function trim18(text) {
-    return (text || "").replace(__rtrim, "" );
+    //return (text || "").replace(__rtrim, "" );
+    return text;
 }
 
 // rightjs's suggestion
@@ -247,10 +251,61 @@ function trim19(text){
     return str.slice(0, i + 1);
 }
 
-// Native implementation if available.
-/*function trim20(text){
-    return text.trim();
-}*/
+function trim20(str){
+    var len = str.length, i = -1;
+    if (len){
+        var whiteSpace = String.whiteSpace;
+        while(whiteSpace[str.charCodeAt(--len)]);
+        if (++len){
+            while (whiteSpace[str.charCodeAt(++i)]);
+        }
+        str = str.substring(i, len);
+    }
+    return str;
+}
+
+// Implementation suggested by
+function trim21(str){
+    var len = str.length,
+        i = 0,
+        whiteSpace = String.whiteSpace,
+        backward = true, forward = true;
+    if (len--){
+        for (;i < len;){
+            backward = whiteSpace[str.charCodeAt(len)];
+            forward = whiteSpace[str.charCodeAt(i)];
+
+            if (!forward && !backward){
+                break;
+            }
+
+            backward && --len;
+            forward && ++i;
+        }
+        str = str.substring(i, len + 1);
+    }
+    return str;
+}
+
+function trim22(str){
+
+
+    return str;
+}
+
+var trims = [
+    //0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+    10, 11, 12, 13,
+    14, 15, 16, 17,
+    //18,
+    19,
+    20,
+    21
+    //22
+];
+//var START_TRIM = 13;
+//var TRIM_COUNT = 22;
+
 
 		// Create basic console methods
 		var konsole = {
@@ -275,9 +330,9 @@ function trim19(text){
 				times = $('times').value,
 				took;
 			konsole.log('Original length: ' + value.length + '<br>\n');
-			for (var i = 1; i <= 19; i++) {
-				var name = 'trim' + i,
-					fn = window[name],
+            for (var i = 0, len = trims.length; i < len; ++i) {
+                var	name = 'trim' + trims[i],
+                    fn = window[name],
 					n = times;
 				konsole.time(name);
 				while (n--) fn(value);

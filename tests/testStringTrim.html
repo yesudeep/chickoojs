@@ -1,16 +1,19 @@
 <!doctype html>
 <html>
     <head>
-        <title>String.prototype.trim tests.</title>
+        <title>String.prototype.strip tests.</title>
         <script src="../src/builtins.js"></script>
     </head>
     <body>
         <script>            
-            console.assert('  foobar  '.trim() == 'foobar');
-            console.assert('  foobar  r'.trim('r') == '  foobar  ');
-            console.assert('  foobar  r'.trim('r', true) == 'fooba');
-            console.assert('r  rfoobar  r'.trim('r', true) == 'fooba');
-            console.assert('  foobar  r'.trim('r', false) == '  foobar  ');
+            console.assert('  foobar  '.strip() == 'foobar');
+            console.assert('  foobar  r'.strip('r') == '  foobar  ');
+            console.assert('  foobar  r'.strip(['r']) == '  foobar  ');
+            console.assert('  foobar  r'.strip(String.whiteSpaceCharacters) == 'foobar');
+            console.assert('  foobar  r'.strip('r', true) == 'fooba');
+            console.assert('r  rfoobar  r'.strip('r', true) == 'fooba');
+            console.assert('  foobar  r'.strip('r', false) == '  foobar  ');
         </script>
     </body>
 </html>
+
