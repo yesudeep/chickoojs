@@ -32,7 +32,6 @@ function loadScript(attributes, where){
         };
     } else { // Others
         script.onload = attributes.onload;
-        }
     }
 
     script.src = decodeURI(attributes.src);
