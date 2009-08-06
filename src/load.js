@@ -44,7 +44,7 @@ function getScripts(scripts){
 
     for (var i = 0, len = scripts.length, attr = null; i < len; ++i){
         attr = scripts[i];
-        switch(Object.prototype.toString.call(attr){
+        switch(Object.prototype.toString.call(attr)){
             case '[object String]':
                 attr = {src: attr};
                 break;
