@@ -8,10 +8,6 @@
  * on ANY of the scripts loaded with this loader.  IE
  * will spit errors about undefined symbols.
  */
-function getScriptAttributes(script){
-    return script;
-}
-
 function loadScript(attributes, where){
     var doc = document,
         script = doc.createElement("script");
@@ -58,5 +54,4 @@ function getScripts(scripts){
         loadScript(attr, where);
     }
 }
-
 
