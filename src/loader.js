@@ -1,5 +1,6 @@
 /**
- * Load scripts in parallel.
+ * Load scripts in parallel
+ * but execute them in order.
  * Copyright (C) 2009 happychickoo
  *
  * Licensed under the terms of the MIT license.
