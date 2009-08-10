@@ -1,0 +1,3 @@
+[submodule "src/jquery/tweet"]
+	path = src/jquery/tweet
+	url = git://github.com/seaofclouds/tweet.git
