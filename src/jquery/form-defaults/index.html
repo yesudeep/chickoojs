@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>jQuery Form Default Values Plugin</title>
+	<script type="text/javascript" language="javascript" src="jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="jquery.form-defaults.js"></script>
+	
+	<script type="text/javascript">
+	<!--
+		$(document).ready(function() {
+			//Assign default value to form field #1
+			$("#fname").DefaultValue("Enter your first name..");
+			$("$lname").DefaultValue("Enter your last name..");
+			$("#desc").DefaultValue("Describe yourself...");
+		});
+	-->
+	</script>
+</head>
+<body>
+	<fieldset>
+		<legend>Example Form</legend>
+		<form action="process.php" method="post">
+			<label for="fname">First Name: </label>
+			<input type="text" size="30" name="fname" id="fname" value="" /><br />
+			
+			<label for="fname">Last Name: </label>
+			<input type="text" size="30" name="lname" id="lname" /><br />
+			
+			<label for="desc">Description:</label><br />
+			<textarea id="desc" name="desc"></textarea><br />
+			
+			<input type="submit" value="Submit" />
+		</form>
+	</fieldset>
+</body>
+</html>
