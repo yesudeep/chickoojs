@@ -1,3 +1,6 @@
 [submodule "src/jquery/tweet"]
 	path = src/jquery/tweet
 	url = git://github.com/seaofclouds/tweet.git
+[submodule "src/raphael"]
+	path = src/raphael
+	url = git://github.com/DmitryBaranovskiy/raphael.git
