@@ -77,21 +77,30 @@ var JsonRpcService = new Class({
 		 * generated.  The generated wrapper methods will be placed in the
 		 * service.api.* namespace.
 		 */
-		api: []
+		api: [],
+
+		/**
+		 * Get a list of methods from the service itself.  Calls the service_methods() remote routine.
+		 * You will need that implemented.
+		 */
+		//inferMethods: false,
+
+		/**
+		 * Service methods lister.  Default remote procedure name is 'service_methods'.
+		 */
+		//serviceMethodsLister: 'service_methods'
 	},
 
 	/**
 	 * Constructor.
-	 *
-	 * @url			String	A JsonRpcService instance acts as a proxy for this
-	 * 						service URL.
+	 *s
 	 * @options  	Object	An object contains various options that you want
 	 * 						overridden with your values.
 	 */
-	initialize: function(url, options){
+	initialize: function(options){
 		this.setOptions(options);
-		this.options.url = url;
 
+		var methods = this.options.api;
 		var version = this.options.version;
 		switch(version){
 			case '1.0':
@@ -103,21 +112,22 @@ var JsonRpcService = new Class({
 				break;
 		}
 
-		var methods = options.api;
+        /*if (options.inferMethods){
+            this.__remote_call(options, options.serviceMethodsLister, [], function(method_list){
+                methods = methods.concat(method_list);
+            }, function(){
+                throw new Error('Could not infer methods.');
+            });
+        }*/
+
+        // Construct API.
+        var service = this, serviceOptions = this.options;
 		for (var i = methods.length - 1, method_name = ''; i > -1; i--){
 			method_name = methods[i];
-			this.api[method_name] = this.__create_api(method_name);
-		}
-	},
-
-	// Private methods.
-	__create_api: function(method_name){
-		var service = this;
-
-		return function(params, onSuccess, onCancel){
-			var options = service.options;
-			service.__remote_call(options, method_name,
-					params, onSuccess, onCancel);
+			this.api[method_name] = function(params, onSuccess, onCancel){
+                service.__remote_call(serviceOptions, method_name,
+                        params, onSuccess, onCancel);
+            };
 		}
 	},
 
@@ -126,7 +136,7 @@ var JsonRpcService = new Class({
 		var version = options.version;
 		var message = Object.merge(this.message_template, {
 			method: method_name,
-			params: params,
+			params: params || [],
 			id: serial_id
 		});
 
