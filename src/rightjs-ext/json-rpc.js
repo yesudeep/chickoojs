@@ -1,4 +1,4 @@
-/*!
+/*
  * JsonRpcService object for RightJS.
  * Copyright (C) 2009  Yesudeep Mangalapilly <yesudeep@gmail.com>.
  *
