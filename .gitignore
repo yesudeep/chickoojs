@@ -1,5 +1,9 @@
 *~
 *.swp
+*.bak
 
 __MACOSX
+.DS_Store
+Thumbs.db
+Desktop.ini
 
