@@ -7,3 +7,6 @@
 [submodule "src/jquery/form"]
 	path = src/jquery/form
 	url = git://github.com/malsup/form.git
+[submodule "src/jquery/anythingslider"]
+	path = src/jquery/anythingslider
+	url = git://github.com/dcneiner/AnythingSlider.git
