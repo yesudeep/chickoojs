@@ -10,3 +10,6 @@
 [submodule "src/jquery/anythingslider"]
 	path = src/jquery/anythingslider
 	url = git://github.com/dcneiner/AnythingSlider.git
+[submodule "src/jquery/facebox"]
+	path = src/jquery/facebox
+	url = git://github.com/defunkt/facebox.git
