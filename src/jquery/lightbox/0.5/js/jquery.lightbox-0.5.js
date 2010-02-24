@@ -469,4 +469,5 @@
 		// Return the jQuery object for chaining. The unbind method is used to avoid click conflict when the plugin is called more than once
 		return this.unbind('click').click(_initialize);
 	};
-})(jQuery); // Call and execute the function immediately passing the jQuery object
+})(jQuery);
+
